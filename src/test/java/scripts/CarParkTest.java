@@ -36,10 +36,11 @@ public class CarParkTest  {
 	    	capabilities.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS, true);
 	    	capabilities.setCapability("ignoreZoomSetting", true);
 	    	capabilities.setCapability("ignoreProtectedModeSettings" , true);
+	    	capabilities.setCapability(InternetExplorerDriver.INITIAL_BROWSER_URL, "http://192.168.0.152/MyWebApp2/CarPark.aspx");
 	    	driver = new InternetExplorerDriver(capabilities);
 	    	driver.manage().window().maximize();
 		    driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-		    driver.get("http://192.168.0.152/MyWebApp2/CarPark.aspx");
+		    //driver.get("http://192.168.0.152/MyWebApp2/CarPark.aspx");
 		    //this.wait = new WebDriverWait(driver,60);
 			
 		}
@@ -73,7 +74,8 @@ public void carParkTest() throws Exception {
 			Thread.sleep(4000);
 			File tmpFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
 			FileUtils.copyFile(tmpFile, file);
-	
+			Thread.sleep(4000);
+			driver.quit();
 	}catch (NoSuchElementException nse) {
 		nse.printStackTrace();
 		Assert.assertTrue(false);
