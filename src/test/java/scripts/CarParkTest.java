@@ -1,4 +1,5 @@
 package scripts;
+import java.io.File;
 import java.util.concurrent.TimeUnit;
 
 import org.testng.Assert;
@@ -6,7 +7,10 @@ import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 
 import org.openqa.selenium.NoSuchElementException;
@@ -21,11 +25,12 @@ import utils.BaseTest;
 public class CarParkTest  {
 	
 	public WebDriver driver = null;
+	String sAbsPath = null;
 	@BeforeMethod
 	public void beforeMethod() {
 		  
 		  	System.out.println("Inside beforeMethod");
-		  	String sAbsPath = System.getProperty("user.dir");
+		  	sAbsPath = System.getProperty("user.dir");
 			System.setProperty("webdriver.ie.driver", sAbsPath + "\\drivers\\IEDriverServer_Win32_2.44.0\\IEDriverServer.exe");
 	    	DesiredCapabilities capabilities = DesiredCapabilities.internetExplorer();
 	    	capabilities.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS, true);
@@ -39,7 +44,7 @@ public class CarParkTest  {
 			 
 		}
 @Test(priority=1)
-public void pcidssAcquirerLogin() throws Exception {
+public void carParkTest() throws Exception {
 	
 	try {
 			driver.findElement(By.id("txtShortDescription")).sendKeys("sd2short");
@@ -59,17 +64,16 @@ public void pcidssAcquirerLogin() throws Exception {
 			Thread.sleep(2000);
 			driver.findElement(By.id("txtFullDecreasing")).sendKeys("10");
 			Thread.sleep(2000);
-			
-			
-			
-			
-			
-			
 			Thread.sleep(2000);
 			Thread.sleep(2000);
 			driver.findElement(By.id("btnSave")).click();
 			Thread.sleep(2000);
-			
+			File file = new File(sAbsPath + "test" + ".png");
+			System.out.println("File path : " + sAbsPath + "File id : " + file);
+			Thread.sleep(4000);
+			File tmpFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+			FileUtils.copyFile(tmpFile, file);
+	
 	}catch (NoSuchElementException nse) {
 		nse.printStackTrace();
 		Assert.assertTrue(false);
