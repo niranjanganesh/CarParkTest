@@ -110,7 +110,7 @@
                     </property>
          			 </systemProperties>
 					<suiteXmlFiles>
-            			<suiteXmlFile>testng.xml</suiteXmlFile>
+            			<suiteXmlFile>D:/venkat/workspace/CARegSuite/testng.xml</suiteXmlFile>
           			</suiteXmlFiles>
 					<workingDirectory>target/</workingDirectory>
 					</configuration>
