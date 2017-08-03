@@ -5,8 +5,8 @@
 	 <listeners>
         <listener class-name="org.testng.reporters.XMLReporter" />
     </listeners>
-<test name="Grid Test On IE" >
-    <parameter name="browser" value="ie" />
+<test name="Car Park Test on Chrome" >
+    <parameter name="browser" value="chrome" />
  		 <classes>
 			<class name="scripts.CarParkTest"/>
 		</classes>

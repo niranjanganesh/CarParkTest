@@ -14,6 +14,8 @@ import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 
 import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -32,20 +34,44 @@ public class CarParkTest  {
 		  
 		  	System.out.println("Inside beforeMethod");
 		  	sAbsPath = System.getProperty("user.dir");
-			System.setProperty("webdriver.ie.driver", sAbsPath + "\\drivers\\IEDriverServer_Win32_2.44.0\\IEDriverServer.exe");
-	    	DesiredCapabilities capabilities = DesiredCapabilities.internetExplorer();
-	    	capabilities.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS, true);
-	    	capabilities.setCapability("ignoreZoomSetting", true);
-	    	capabilities.setCapability("ignoreProtectedModeSettings" , true);
-	    	capabilities.setCapability(InternetExplorerDriver.INITIAL_BROWSER_URL, "http://192.168.0.211/CarParkWeb/CarPark.aspx");
-	    	driver = new InternetExplorerDriver(capabilities);
-	    	
-		  	//driver = new FirefoxDriver();
-		  	//driver.manage().window().maximize();
-		    //driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-		    //driver.get("http://192.168.0.211/CarParkWeb/CarPark.aspx");
-		    //this.wait = new WebDriverWait(driver,60);
-			
+		
+		
+			//	System.setProperty("webdriver.chrome.driver",
+			//			sAbsPath + "\\drivers\\chromedriver_win32\\chromedriver.exe");
+				System.setProperty("webdriver.chrome.driver", "D:\\selenium_softwares\\chromedriver_win32\\chromedriver.exe");
+				
+				ChromeOptions chromeOptions = new ChromeOptions();
+				chromeOptions.addArguments("no-sandbox");
+				//Fix for cannot get automation extension
+				chromeOptions.addArguments("disable-extensions");
+				chromeOptions.addArguments("--start-maximized");
+
+			//	DesiredCapabilities capabilities = DesiredCapabilities.chrome();
+				driver = new ChromeDriver(chromeOptions);
+				driver.manage().window().maximize();
+				driver.get("http://192.168.0.211/CarParkWeb/CarPark.aspx");
+				System.out.println("Running on chrome");
+				
+				//IE
+				/*
+			  	System.setProperty("webdriver.ie.driver", sAbsPath + "\\drivers\\IEDriverServer_Win32_2.44.0\\IEDriverServer.exe");
+		    	DesiredCapabilities capabilities = DesiredCapabilities.internetExplorer();
+		    	capabilities.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS, true);
+		    	capabilities.setCapability("ignoreZoomSetting", true);
+		    	capabilities.setCapability("ignoreProtectedModeSettings" , true);
+		    	capabilities.setCapability(InternetExplorerDriver.INITIAL_BROWSER_URL, "http://192.168.0.211/CarParkWeb/CarPark.aspx");
+		    	driver = new InternetExplorerDriver(capabilities);
+		    	*/
+				
+				//firefox
+				/*
+
+		  	driver = new FirefoxDriver();
+		  	driver.manage().window().maximize();
+		    driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		    driver.get("http://192.168.0.211/CarParkWeb/CarPark.aspx");
+		    this.wait = new WebDriverWait(driver,60);
+			*/
 		}
 @Test(priority=1)
 public void carParkTest() throws Exception {
