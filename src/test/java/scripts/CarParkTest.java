@@ -32,18 +32,18 @@ public class CarParkTest  {
 		  
 		  	System.out.println("Inside beforeMethod");
 		  	sAbsPath = System.getProperty("user.dir");
-			/*System.setProperty("webdriver.ie.driver", sAbsPath + "\\drivers\\IEDriverServer_Win32_2.44.0\\IEDriverServer.exe");
+			System.setProperty("webdriver.ie.driver", sAbsPath + "\\drivers\\IEDriverServer_Win32_2.44.0\\IEDriverServer.exe");
 	    	DesiredCapabilities capabilities = DesiredCapabilities.internetExplorer();
 	    	capabilities.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS, true);
 	    	capabilities.setCapability("ignoreZoomSetting", true);
 	    	capabilities.setCapability("ignoreProtectedModeSettings" , true);
-	    	capabilities.setCapability(InternetExplorerDriver.INITIAL_BROWSER_URL, "http://192.168.0.152/MyWebApp2/CarPark.aspx");
+	    	capabilities.setCapability(InternetExplorerDriver.INITIAL_BROWSER_URL, "http://192.168.0.211/CarParkWeb/CarPark.aspx");
 	    	driver = new InternetExplorerDriver(capabilities);
-	    	*/
-		  	driver = new FirefoxDriver();
-		  	driver.manage().window().maximize();
-		    driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-		    driver.get("http://192.168.0.152/MyWebApp2/CarPark.aspx");
+	    	
+		  	//driver = new FirefoxDriver();
+		  	//driver.manage().window().maximize();
+		    //driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		    //driver.get("http://192.168.0.211/CarParkWeb/CarPark.aspx");
 		    //this.wait = new WebDriverWait(driver,60);
 			
 		}
