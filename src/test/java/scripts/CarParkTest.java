@@ -21,6 +21,10 @@ import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.Select;
 
+import com.relevantcodes.extentreports.ExtentReports;
+import com.relevantcodes.extentreports.ExtentTest;
+import com.relevantcodes.extentreports.LogStatus;
+
 import utils.BaseTest;
 
 
@@ -29,11 +33,16 @@ public class CarParkTest  {
 	
 	public WebDriver driver = null;
 	String sAbsPath = null;
+	public static ExtentReports extent =null;
+	public static ExtentTest logger = null;
+
 	@BeforeMethod
 	public void beforeMethod() {
 		  
 		  	System.out.println("Inside beforeMethod");
 		  	sAbsPath = System.getProperty("user.dir");
+		  	System.out.println("Absolute path: " + sAbsPath);
+		  	extent = new ExtentReports(sAbsPath+"\\"+"CarParkExtentReports.html");
 		
 		
 			//	System.setProperty("webdriver.chrome.driver",
@@ -49,7 +58,10 @@ public class CarParkTest  {
 			//	DesiredCapabilities capabilities = DesiredCapabilities.chrome();
 				driver = new ChromeDriver(chromeOptions);
 				driver.manage().window().maximize();
-				driver.get("http://192.168.0.211/CarParkWeb/CarPark.aspx");
+				//driver.get("http://192.168.0.211/CarParkWeb/CarPark.aspx");
+				//driver.get("http://localhost:82/MyWebApp2/CarParkWeb/CarPark.aspx");
+				driver.get("https://www.google.com");
+				
 				System.out.println("Running on chrome");
 				
 				//IE
@@ -76,7 +88,11 @@ public class CarParkTest  {
 @Test(priority=1)
 public void carParkTest() throws Exception {
 	
+	
+	
 	try {
+			logger = extent.startTest("CarParkTest");
+			/*
 			driver.findElement(By.id("txtShortDescription")).sendKeys("sd2short");
 			Thread.sleep(2000);
 			driver.findElement(By.id("txtLongDescription")).sendKeys("sd2long");
@@ -98,13 +114,28 @@ public void carParkTest() throws Exception {
 			Thread.sleep(2000);
 			driver.findElement(By.id("btnSave")).click();
 			Thread.sleep(2000);
+			*/
 			File file = new File(sAbsPath + "test" + ".png");
 			System.out.println("File path : " + sAbsPath + "File id : " + file);
 			Thread.sleep(4000);
-			File tmpFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-			FileUtils.copyFile(tmpFile, file);
+			File source = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
 			Thread.sleep(4000);
-			driver.quit();
+			System.out.println("Absolute path inside test method..");
+			String dest = sAbsPath+ "\\ExtentScreenShots\\" + "GoogleHomePage"+" .png";
+			File destination = new File(dest);
+			FileUtils.copyFile(source, destination);
+			System.out.println("Screenshot Taken");
+				
+			System.out.println("Extent Report Run Status : " + logger.getRunStatus());
+			logger.log(LogStatus.INFO, "CarParkTest", "Success updated..");
+			System.out.println("Description & Test : " + logger.getDescription() + " " + logger.getTest());
+			String img = logger.addScreenCapture(dest);
+		    logger.log(LogStatus.PASS,"CarParkTest passed", img);
+		    System.out.println("Extent started ended at : " + logger.getStartedTime());
+		    
+		       
+			
+			
 	}catch (NoSuchElementException nse) {
 		nse.printStackTrace();
 		Assert.assertTrue(false);
@@ -123,6 +154,10 @@ public void carParkTest() throws Exception {
 public void afterMethod() throws InterruptedException {
 	  
 	  	System.out.println("Inside afterMethod");
+	  	extent.flush();
+	  	System.out.println("After flushing..");
+	  	driver.quit();
+	  	System.out.println("Extent Report Run Status : " + logger.getRunStatus());
 	  	//driver.close();
 	 
 	}
