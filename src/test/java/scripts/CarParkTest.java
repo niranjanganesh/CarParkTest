@@ -121,7 +121,7 @@ public void carParkTest() throws Exception {
 			File source = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
 			Thread.sleep(4000);
 			System.out.println("Absolute path inside test method..");
-			String dest = sAbsPath+ "\\ExtentScreenShots\\" + "GoogleHomePage"+" .png";
+			String dest = sAbsPath+ "target\\ExtentScreenShots\\" + "GoogleHomePage"+" .png";
 			File destination = new File(dest);
 			FileUtils.copyFile(source, destination);
 			System.out.println("Screenshot Taken");
