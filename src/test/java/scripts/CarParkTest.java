@@ -131,7 +131,7 @@ public void carParkTest() throws Exception {
 			System.out.println("Description & Test : " + logger.getDescription() + " " + logger.getTest());
 			String img = logger.addScreenCapture(dest);
 		    logger.log(LogStatus.PASS,"CarParkTest passed", img);
-		    System.out.println("Extent started ended at : " + logger.getStartedTime());
+		    System.out.println("Extent started ended on 30/8/2017 at : " + logger.getStartedTime());
 		    
 		       
 			
